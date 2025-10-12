@@ -12,7 +12,7 @@ import { dirname, join } from 'path'
 import { getHomePage } from './src/controllers/mainController.js'
 
 const app = express()
-const PORT = 3015
+const PORT = process.env.PORT || 3015
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
