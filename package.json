@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/sollensmilla/wcag-palate-generator/issues"
   },
-  "homepage": "https://github.com/sollensmilla/wcag-palate-generator#readme"
+  "homepage": "https://github.com/sollensmilla/wcag-palate-generator#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
 }
