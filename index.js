@@ -15,6 +15,7 @@ import PaletteController from './src/controllers/paletteController.js'
 
 const app = express()
 const PORT = process.env.PORT || 3015
+const paletteController = new PaletteController()
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -25,7 +26,7 @@ app.use(express.static(join(__dirname, 'src', 'public')))
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/', getHomePage)
-app.post('/generate', PaletteController.generatePalette)
+app.post('/generate', (req, res) => paletteController.generatePalette(req, res))
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`)
