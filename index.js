@@ -14,6 +14,7 @@ import { fileURLToPath } from 'url'
 import { dirname, join } from 'path'
 import { getHomePage } from './src/controllers/mainController.js'
 import PaletteController from './src/controllers/paletteController.js'
+import paletteRoutes from './src/routes/paletteRoutes.js'
 
 dotenv.config();
 
@@ -32,6 +33,8 @@ app.set('views', join(__dirname, 'src', 'views'))
 app.set('view engine', 'ejs')
 app.use(express.static(join(__dirname, 'src', 'public')))
 app.use(bodyParser.urlencoded({ extended: true }))
+
+app.use('/palette', paletteRoutes)
 
 app.get('/', getHomePage)
 app.post('/generate', (req, res) => paletteController.generatePalette(req, res))
