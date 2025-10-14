@@ -1,10 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title><%= title %></title>
-  <link rel="stylesheet" href="/style.css" />
+  <meta charset="UTF-8" />
+  <title>WCAG Color Palette Generator</title>
+  <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
-  <h1><%= message %></h1>
+  <main>
+    <h1>WCAG Color Palette Generator</h1>
+    <p>Generate accessible color palettes that meet WCAG contrast standards.</p>
+
+    <form action="/generate" method="POST">
+      <label>
+        Base color (hex):
+        <input type="text" name="basecolor" placeholder="#75b45c" required>
+      </label>
+
+      <label>
+        WCAG Level:
+        <select name="level">
+          <option value="AA">AA</option>
+          <option value="AAA">AAA</option>
+        </select>
+      </label>
+
+      <label>
+        Is large text?
+        <select name="isLargeText">
+          <option value="false">No</option>
+          <option value="true">Yes</option>
+        </select>
+      </label>
+
+      <button type="submit">Generate Palette</button>
+    </form>
+  </main>
 </body>
 </html>
