@@ -1,4 +1,4 @@
-import ApplicationError from "./ApplicationError";
+import ApplicationError from "./ApplicationError.js";
 
 export default class DataBaseError extends ApplicationError {
   constructor(message = 'Database operation failed') {

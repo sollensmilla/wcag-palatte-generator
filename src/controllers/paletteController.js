@@ -5,31 +5,32 @@
  */
 import Palette from '../models/Palette.js';
 import { WcagColorService } from "wcag-color-service";
+import ValidationError from '../errors/ValidationError.js';
+import DataBaseError from '../errors/DataBaseError.js';
 
 const wcagColorService = new WcagColorService();
 
 export default class PaletteController {
     generatePalette(req, res) {
-        try {
-            const { basecolor, level, isLargeText } = req.body;
+        const { basecolor, level, isLargeText } = req.body;
 
-            const palette = wcagColorService.generatePalette({
-                basecolor,
-                level,
-                isLargeText: isLargeText === 'true'
-            });
-
-            res.render('palette', { palette, basecolor, level, isLargeText });
-        } catch (error) {
-            console.error(error)
-            res.status(500).send('Something went wrong while generating the palette.')
+        if (!basecolor || !level) {
+            return next(new ValidationError('Missing required fields.'));
         }
+
+        const palette = wcagColorService.generatePalette({
+            basecolor,
+            level,
+            isLargeText: isLargeText === 'true'
+        });
+
+        res.render('palette', { palette, basecolor, level, isLargeText });
     }
 
     async savePalette(req, res) {
-        try {
-            const { name, basecolor, colors, level, isLargeText } = req.body;
+        const { name, basecolor, colors, level, isLargeText } = req.body;
 
+        try {
             const palette = new Palette({
                 name,
                 basecolor,
@@ -40,9 +41,8 @@ export default class PaletteController {
 
             await palette.save();
             res.redirect('/palette')
-        } catch (error) {
-            console.error(error)
-            res.status(500).send('Something went wrong while saving the palette.')
+        } catch (errorr) {
+            next(new DataBaseError('Failed to save palette.'));
         }
     }
 
@@ -50,9 +50,8 @@ export default class PaletteController {
         try {
             const palettes = await Palette.find().lean();
             res.render('palettes', { palettes });
-        } catch (error) {
-            console.error(error);
-            res.status(500).send('Something went wrong while fetching palettes.');
+        } catch (err) {
+            next(new DatabaseError('Failed to fetch palettes.'));
         }
     }
 
@@ -61,10 +60,8 @@ export default class PaletteController {
             const { id } = req.params;
             await Palette.findByIdAndDelete(id);
             res.redirect('/palette');
-        } catch (error) {
-            console.error(error);
-            res.status(500).send('Something went wrong while deleting the palette.');
+        } catch (err) {
+            next(new DatabaseError('Failed to delete palette.'));
         }
     }
-
 }
