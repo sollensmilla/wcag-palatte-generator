@@ -39,6 +39,9 @@ app.use('/palette', paletteRoutes)
 app.get('/', getHomePage)
 app.post('/generate', (req, res) => paletteController.generatePalette(req, res))
 
+import { errorHandler } from './src/middleware/error-handler.js';
+app.use(errorHandler);
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`)
 })
