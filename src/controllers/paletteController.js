@@ -6,7 +6,7 @@
 import Palette from '../models/Palette.js';
 import { WcagColorService } from "wcag-color-service";
 import ValidationError from '../errors/ValidationError.js';
-import DataBaseError from '../errors/DataBaseError.js';
+import DatabaseError from '../errors/DatabaseError.js';
 
 const wcagColorService = new WcagColorService();
 
