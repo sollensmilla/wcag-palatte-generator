@@ -42,7 +42,7 @@ export default class PaletteController {
             await palette.save();
             res.redirect('/palette')
         } catch (errorr) {
-            next(new DataBaseError('Failed to save palette.'));
+            next(new DatabaseError('Failed to save palette.'));
         }
     }
 
