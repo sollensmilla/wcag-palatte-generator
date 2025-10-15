@@ -48,7 +48,7 @@ export default class PaletteController {
 
     async showAllPalettes(req, res) {
         try {
-            const palettes = await Palette.find().lean();
+            const palettes = await Palette.find().sort({ createdAt: -1 }).lean();
             res.render('palettes', { palettes });
         } catch (err) {
             next(new DatabaseError('Failed to fetch palettes.'));
