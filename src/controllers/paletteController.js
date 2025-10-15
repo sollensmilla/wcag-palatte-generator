@@ -3,7 +3,7 @@
  * @author Smilla Sollén <ss226uk@student.lnu.se>
  * @version 1.0.0
  */
-
+import Palette from '../models/Palette.js';
 import { WcagColorService } from "wcag-color-service";
 
 const wcagColorService = new WcagColorService();
@@ -25,4 +25,36 @@ export default class PaletteController {
             res.status(500).send('Something went wrong while generating the palette.')
         }
     }
+
+    async savePalette(req, res) {
+        try {
+            const { name, basecolor, colors, level, isLargeText } = req.body;
+
+            const palette = new Palette({
+                name,
+                basecolor,
+                colors: JSON.parse(colors),
+                level,
+                isLargeText: isLargeText === 'true'
+            })
+
+            await palette.save();
+            res.redirect('/palette')
+        } catch (error) {
+            console.error(error)
+            res.status(500).send('Something went wrong while saving the palette.')
+        }
+    }
+
+
+    async showAllPalettes(req, res) {
+        try {
+            const palettes = await Palette.find().lean();
+            res.render('palettes', { palettes });
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Something went wrong while fetching palettes.');
+        }
+    }
+
 }

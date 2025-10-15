@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Saved Palettes</title>
+  <link rel="stylesheet" href="https://use.typekit.net/hiy5ivd.css">
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <main>
+    <h1>Saved Color Palettes</h1>
+
+    <% if (palettes.length === 0) { %>
+      <p>No palettes saved yet.</p>
+    <% } else { %>
+      <div class="palette-list">
+        <% palettes.forEach(palette => { %>
+          <div class="palette-card">
+            <h2><%= palette.name || 'Unnamed Palette' %></h2>
+
+            <div class="color-row">
+              <% Object.entries(palette.colors).forEach(([name, color]) => { %>
+                <div class="color-box" style="background-color: <%= color %>;">
+                  <p><%= name %></p>
+                  <p><%= color %></p>
+                </div>
+              <% }) %>
+            </div>
+
+            <div class="palette-info">
+              <p><strong>Base color:</strong> <%= palette.basecolor %></p>
+              <p><strong>WCAG level:</strong> <%= palette.level %></p>
+              <p><strong>Large text:</strong> <%= palette.isLargeText ? 'Yes' : 'No' %></p>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+
+    <a href="/">← Generate a new palette</a>
+  </main>
+</body>
+</html>
