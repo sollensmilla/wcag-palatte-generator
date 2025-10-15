@@ -9,7 +9,7 @@ import mongoose from 'mongoose'
 const paletteSchema = new mongoose.Schema({
   name: { type: String, required: true },
   basecolor: { type: String, required: true },
-  colors: [{ type: String, required: true }],
+  colors: { type: mongoose.Schema.Types.Mixed, required: true },
   createdAt: { type: Date, default: Date.now }
 })
 

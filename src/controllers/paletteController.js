@@ -29,14 +29,23 @@ export default class PaletteController {
     async savePalette(req, res) {
         try {
             const { name, basecolor, colors } = req.body;
-            await Palette.create({ name, basecolor, colors });
-            res.status(201).send('Palette saved successfully.');
-            res.redirect('palettes');
+
+            let parsedColors
+            try {
+                parsedColors = JSON.parse(colors)
+            } catch (err) {
+                console.warn('Colors was not valid JSON, saving raw:', colors)
+                parsedColors = colors
+            }
+
+            await Palette.create({ name, basecolor, colors: parsedColors })
+            res.redirect('/palette')
         } catch (error) {
-            console.error(error);
-            res.status(500).send('Something went wrong while saving the palette.');
+            console.error(error)
+            res.status(500).send('Something went wrong while saving the palette.')
         }
     }
+
 
     async showAllPalettes(req, res) {
         try {
