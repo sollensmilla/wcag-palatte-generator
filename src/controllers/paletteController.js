@@ -46,7 +46,6 @@ export default class PaletteController {
         }
     }
 
-
     async showAllPalettes(req, res) {
         try {
             const palettes = await Palette.find().lean();
@@ -54,6 +53,17 @@ export default class PaletteController {
         } catch (error) {
             console.error(error);
             res.status(500).send('Something went wrong while fetching palettes.');
+        }
+    }
+
+    async deletePalette(req, res) {
+        try {
+            const { id } = req.params;
+            await Palette.findByIdAndDelete(id);
+            res.redirect('/palette');
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Something went wrong while deleting the palette.');
         }
     }
 
