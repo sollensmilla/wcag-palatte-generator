@@ -28,17 +28,17 @@ export default class PaletteController {
 
     async savePalette(req, res) {
         try {
-            const { name, basecolor, colors } = req.body;
+            const { name, basecolor, colors, level, isLargeText } = req.body;
 
-            let parsedColors
-            try {
-                parsedColors = JSON.parse(colors)
-            } catch (err) {
-                console.warn('Colors was not valid JSON, saving raw:', colors)
-                parsedColors = colors
-            }
+            const palette = new Palette({
+                name,
+                basecolor,
+                colors: JSON.parse(colors),
+                level,
+                isLargeText: isLargeText === 'true'
+            })
 
-            await Palette.create({ name, basecolor, colors: parsedColors })
+            await palette.save();
             res.redirect('/palette')
         } catch (error) {
             console.error(error)

@@ -26,15 +26,17 @@
         </div>
 
         <form action="/palette/save" method="POST">
-    <label for="name">Palette Name:</label>
-    <input type="text" id="name" name="name" placeholder="My Palette" required />
+            <label for="name">Palette Name:</label>
+            <input type="text" id="name" name="name" placeholder="My Palette" required />
 
-    <input type="hidden" name="basecolor" value="<%= basecolor %>">
+            <input type="hidden" name="basecolor" value="<%= basecolor %>">
+            <input type="hidden" name="colors" value='<%= JSON.stringify(palette) %>'>
+            <input type="hidden" name="level" value="<%= level %>">
+            <input type="hidden" name="isLargeText" value="<%= isLargeText %>">
 
-    <input type="hidden" name="colors" value='<%= JSON.stringify(palette) %>'>
+            <button type="submit">Save Palette</button>
+        </form>
 
-    <button type="submit">Save Palette</button>
-</form>
 
         <a href="/">← Generate another palette</a>
     </main>
