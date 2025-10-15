@@ -5,5 +5,5 @@
  */
 
 export function getHomePage(req, res) {
-  res.render('index', { title: 'Test App', message: 'Hi from the controller!' })
+  res.render('index'); 
 }
