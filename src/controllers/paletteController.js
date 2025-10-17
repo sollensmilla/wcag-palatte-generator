@@ -40,8 +40,10 @@ export default class PaletteController {
             })
 
             await palette.save();
-            res.redirect('/palette')
-        } catch (errorr) {
+
+            req.flash('success', `Palette "${name}" saved successfully!`);
+            res.redirect('/palette');
+        } catch (error) {
             next(new DatabaseError('Failed to save palette.'));
         }
     }
@@ -59,6 +61,8 @@ export default class PaletteController {
         try {
             const { id } = req.params;
             await Palette.findByIdAndDelete(id);
+
+            req.flash('success', 'Palette deleted successfully.');
             res.redirect('/palette');
         } catch (err) {
             next(new DatabaseError('Failed to delete palette.'));

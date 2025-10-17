@@ -6,43 +6,62 @@
     <title>Your WCAG Palette</title>
     <link rel="stylesheet" href="https://use.typekit.net/hiy5ivd.css">
     <link rel="stylesheet" href="/style.css" />
+    <script src="/js/flash-script.js" defer></script>
 </head>
 
 <body>
     <main>
-        <h1>Your WCAG Color Palette</h1>
-
-        <div class="palette" style="background-color: <%= palette.base %>;">
-            <% Object.entries(palette).forEach(([name, color])=> { %>
-                <div class="color-box" style="color: <%= color %>;">
-                    <p>
-                        <%= name %>
-                    </p>
-                    <p>
-                        <%= color %>
-                    </p>
+        <% if (error && error.length> 0) { %>
+            <% error.forEach(msg=> { %>
+                <div class="alert alert-danger">
+                    <%= msg %>
                 </div>
                 <% }) %>
-        </div>
+                    <% } %>
 
-        <form action="/palette/save" method="POST">
-            <label for="name">Palette Name:</label>
-            <input type="text" id="name" name="name" placeholder="My Palette" required />
-
-            <input type="hidden" name="basecolor" value="<%= basecolor %>">
-            <input type="hidden" name="colors" value='<%= JSON.stringify(palette) %>'>
-            <input type="hidden" name="level" value="<%= level %>">
-            <input type="hidden" name="isLargeText" value="<%= isLargeText %>">
-
-            <button type="submit">Save Palette</button>
-        </form>
+                        <% if (success && success.length> 0) { %>
+                            <% success.forEach(msg=> { %>
+                                <div class="alert alert-success">
+                                    <%= msg %>
+                                </div>
+                                <% }) %>
+                                    <% } %>
 
 
-        <a href="/">← Generate another palette</a>
+                                        <h1>Your WCAG Color Palette</h1>
 
-        <form action="/palette" method="GET">
-            <button type="submit">Show Saved Palettes</button>
-        </form>
+                                        <div class="palette" style="background-color: <%= palette.base %>;">
+                                            <% Object.entries(palette).forEach(([name, color])=> { %>
+                                                <div class="color-box" style="color: <%= color %>;">
+                                                    <p>
+                                                        <%= name %>
+                                                    </p>
+                                                    <p>
+                                                        <%= color %>
+                                                    </p>
+                                                </div>
+                                                <% }) %>
+                                        </div>
+
+                                        <form action="/palette/save" method="POST">
+                                            <label for="name">Palette Name:</label>
+                                            <input type="text" id="name" name="name" placeholder="My Palette"
+                                                required />
+
+                                            <input type="hidden" name="basecolor" value="<%= basecolor %>">
+                                            <input type="hidden" name="colors" value='<%= JSON.stringify(palette) %>'>
+                                            <input type="hidden" name="level" value="<%= level %>">
+                                            <input type="hidden" name="isLargeText" value="<%= isLargeText %>">
+
+                                            <button type="submit">Save Palette</button>
+                                        </form>
+
+
+                                        <a href="/">← Generate another palette</a>
+
+                                        <form action="/palette" method="GET">
+                                            <button type="submit">Show Saved Palettes</button>
+                                        </form>
     </main>
 </body>
 
