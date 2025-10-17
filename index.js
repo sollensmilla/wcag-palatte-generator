@@ -8,7 +8,6 @@ import bodyParser from 'body-parser'
 import { fileURLToPath } from 'url'
 import { dirname, join } from 'path'
 import { getHomePage } from './src/controllers/mainController.js'
-import { validatePalette } from './src/middleware/validate-palette.js'
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -38,7 +37,6 @@ configureFlash(app);
 import paletteRoutes from './src/routes/paletteRoutes.js'
 app.use('/palette', paletteRoutes)
 app.get('/', getHomePage)
-app.post('/generate', validatePalette, (req, res) => paletteController.generatePalette(req, res))
 
 import { errorHandler } from './src/middleware/error-handler.js';
 app.use(errorHandler);
