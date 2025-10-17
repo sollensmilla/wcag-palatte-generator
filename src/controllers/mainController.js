@@ -4,6 +4,6 @@
  * @version 1.0.0
  */
 
-export function getHomePage(req, res) {
+export default function getHomePage(req, res) {
   res.render('index'); 
 }
