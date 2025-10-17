@@ -11,93 +11,61 @@ import DatabaseError from '../errors/DatabaseError.js';
 const wcagColorService = new WcagColorService();
 
 export default class PaletteController {
-    generatePalette(req, res, next) {
+    generatePalette(req, res) {
+        const { basecolor, level, isLargeText } = req.body;
+
+        if (!basecolor || !level) {
+            return next(new ValidationError('Missing required fields.'));
+        }
+
+        const palette = wcagColorService.generatePalette({
+            basecolor,
+            level,
+            isLargeText: isLargeText === 'true'
+        });
+
+        res.render('palette', { palette, basecolor, level, isLargeText });
+    }
+
+    async savePalette(req, res) {
+        const { name, basecolor, colors, level, isLargeText } = req.body;
+
         try {
-            const { basecolor, level, isLargeText } = this.#validateGenerateInput(req.body);
-            const palette = this.#createPalette(basecolor, level, isLargeText);
-            this.#renderPalette(res, palette, basecolor, level, isLargeText);
+            const palette = new Palette({
+                name,
+                basecolor,
+                colors: JSON.parse(colors),
+                level,
+                isLargeText: isLargeText === 'true'
+            })
+
+            await palette.save();
+
+            req.flash('success', `Palette "${name}" saved successfully!`);
+            res.redirect('/palette');
         } catch (error) {
-            next(error);
+            next(new DatabaseError('Failed to save palette.'));
         }
     }
 
-    async savePalette(req, res, next) {
+    async showAllPalettes(req, res) {
         try {
-            const paletteData = this.#validateSaveInput(req.body);
-            await this.#savePaletteToDB(paletteData);
-            this.#handleSuccess(req, res, `Palette "${paletteData.name}" saved successfully!`);
-        } catch (error) {
-            next(error instanceof ValidationError ? error : new DatabaseError('Failed to save palette.'));
-        }
-    }
-
-    async showAllPalettes(req, res, next) {
-        try {
-            const palettes = await this.#fetchAllPalettes();
+            const palettes = await Palette.find().sort({ createdAt: -1 }).lean();
             res.render('palettes', { palettes });
-        } catch {
+        } catch (err) {
             next(new DatabaseError('Failed to fetch palettes.'));
         }
     }
 
-    async deletePalette(req, res, next) {
+    async deletePalette(req, res) {
         try {
-            await this.#deletePaletteById(req.params.id);
-            this.#handleSuccess(req, res, 'Palette deleted successfully.');
-        } catch {
+            const { id } = req.params;
+            await Palette.findByIdAndDelete(id);
+
+            req.flash('success', 'Palette deleted successfully.');
+            res.redirect('/palette');
+        } catch (err) {
             next(new DatabaseError('Failed to delete palette.'));
         }
-    }
-
-    #validateGenerateInput({ basecolor, level, isLargeText }) {
-        if (!basecolor || !level) {
-            throw new ValidationError('Missing required fields.');
-        }
-
-        return {
-            basecolor,
-            level,
-            isLargeText: String(isLargeText) === 'true'
-        };
-    }
-
-    #validateSaveInput({ name, basecolor, colors, level, isLargeText }) {
-        if (!name || !basecolor || !colors || !level) {
-            throw new ValidationError('Missing required fields.');
-        }
-
-        return {
-            name,
-            basecolor,
-            colors: JSON.parse(colors),
-            level,
-            isLargeText: isLargeText === 'true'
-        };
-    }
-
-    #createPalette(basecolor, level, isLargeText) {
-        return wcagColorService.generatePalette({ basecolor, level, isLargeText });
-    }
-
-    async #savePaletteToDB(paletteData) {
-        const palette = new Palette(paletteData);
-        await palette.save();
-    }
-
-    async #fetchAllPalettes() {
-        return await Palette.find().sort({ createdAt: -1 }).lean();
-    }
-
-    async #deletePaletteById(id) {
-        await Palette.findByIdAndDelete(id);
-    }
-
-    #renderPalette(res, palette, basecolor, level, isLargeText) {
-        res.render('palette', { palette, basecolor, level, isLargeText });
-    }
-
-    #handleSuccess(req, res, message) {
-        req.flash('success', message);
-        res.redirect('/palette');
     }
 }
