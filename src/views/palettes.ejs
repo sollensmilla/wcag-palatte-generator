@@ -11,22 +11,21 @@
 
 <body>
     <main>
-        <% if (error && error.length> 0) { %>
-            <% error.forEach(msg=> { %>
+        <% if (flash.error && flash.error.length> 0) { %>
+            <% flash.error.forEach(msg=> { %>
                 <div class="alert alert-danger">
                     <%= msg %>
                 </div>
                 <% }) %>
                     <% } %>
 
-                        <% if (success && success.length> 0) { %>
-                            <% success.forEach(msg=> { %>
+                        <% if (flash.success && flash.success.length> 0) { %>
+                            <% flash.success.forEach(msg=> { %>
                                 <div class="alert alert-success">
                                     <%= msg %>
                                 </div>
                                 <% }) %>
                                     <% } %>
-
 
                                         <h1>Saved Color Palettes</h1>
 

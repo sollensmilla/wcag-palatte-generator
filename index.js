@@ -16,7 +16,7 @@ import PaletteController from './src/controllers/paletteController.js'
 
 import paletteRoutes from './src/routes/paletteRoutes.js'
 
-import configureFlash from './src/middleware/configure-flash.js'
+import FlashMiddleware from './src/middleware/FlashMiddleware.js'
 import { errorHandler } from './src/middleware/error-handler.js'
 
 dotenv.config();
@@ -42,7 +42,9 @@ app.set('view engine', 'ejs')
 
 app.use(express.static(join(__dirname, 'src', 'public')))
 app.use(bodyParser.urlencoded({ extended: true }))
-configureFlash(app);
+
+const flashMiddleware = new FlashMiddleware(app)
+flashMiddleware.init()
 
 const paletteController = new PaletteController()
 app.use('/palette', paletteRoutes)
