@@ -6,41 +6,59 @@
   <title>WCAG Color Palette Generator</title>
   <link rel="stylesheet" href="https://use.typekit.net/hiy5ivd.css">
   <link rel="stylesheet" href="/style.css" />
+  <script src="/js/flash-script.js" defer></script>
 </head>
 
 <body>
   <main>
-    <h1>WCAG Color Palette Generator</h1>
-    <p>Generate accessible color palettes that meet WCAG contrast standards.</p>
+    <% if (error && error.length> 0) { %>
+      <% error.forEach(msg=> { %>
+        <div class="alert alert-danger">
+          <%= msg %>
+        </div>
+        <% }) %>
+          <% } %>
 
-    <form action="/generate" method="POST">
-      <label>
-        Base color (hex):
-        <input type="text" name="basecolor" placeholder="#75b45c" required>
-      </label>
+            <% if (success && success.length> 0) { %>
+              <% success.forEach(msg=> { %>
+                <div class="alert alert-success">
+                  <%= msg %>
+                </div>
+                <% }) %>
+                  <% } %>
 
-      <label>
-        WCAG Level:
-        <select name="level">
-          <option value="AA">AA</option>
-          <option value="AAA">AAA</option>
-        </select>
-      </label>
 
-      <label>
-        Is large text?
-        <select name="isLargeText">
-          <option value="false">No</option>
-          <option value="true">Yes</option>
-        </select>
-      </label>
+                    <h1>WCAG Color Palette Generator</h1>
+                    <p>Generate accessible color palettes that meet WCAG contrast standards.</p>
 
-      <button type="submit">Generate Palette</button>
-    </form>
+                    <form action="/palette/generate" method="POST">
+                      <label>
+                        Base color (hex):
+                        <input type="text" name="basecolor" placeholder="#75b45c" required>
+                      </label>
 
-    <form action="/palette" method="GET">
-      <button type="submit">Show Saved Palettes</button>
-    </form>
+                      <label>
+                        WCAG Level:
+                        <select name="level">
+                          <option value="AA">AA</option>
+                          <option value="AAA">AAA</option>
+                        </select>
+                      </label>
+
+                      <label>
+                        Is large text?
+                        <select name="isLargeText">
+                          <option value="false">No</option>
+                          <option value="true">Yes</option>
+                        </select>
+                      </label>
+
+                      <button type="submit">Generate Palette</button>
+                    </form>
+
+                    <form action="/palette" method="GET">
+                      <button type="submit">Show Saved Palettes</button>
+                    </form>
   </main>
 </body>
 

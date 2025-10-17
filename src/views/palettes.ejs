@@ -6,63 +6,84 @@
     <title>Saved Palettes</title>
     <link rel="stylesheet" href="https://use.typekit.net/hiy5ivd.css">
     <link rel="stylesheet" href="/style.css" />
+    <script src="/js/flash-script.js" defer></script>
 </head>
 
 <body>
     <main>
-        <h1>Saved Color Palettes</h1>
-
-        <% if (palettes.length===0) { %>
-            <p>No palettes saved yet.</p>
-            <% } else { %>
-                <div class="palette-list">
-                    <% palettes.forEach(palette=> { %>
-                        <div class="palette-card">
-                            <div class="palette-header">
-                                <h2 class="palette-title">
-                                    <%= palette.name || 'Unnamed Palette' %>
-                                </h2>
-
-                                <form action="/palette/delete/<%= palette._id %>" method="POST" class="delete-form">
-                                    <button type="submit" class="delete-btn">✖</button>
-                                </form>
-                            </div>
-
-                            <div class="color-row">
-                                <% Object.entries(palette.colors).forEach(([name, color])=> {
-                                    const isLighter = name.toLowerCase().includes('lighter');
-                                    const textColor = isLighter ? '#000' : '#fff';
-                                    %>
-                                    <div class="color-box"
-                                        style="background-color: <%= color %>; color: <%= textColor %>;">
-                                        <p>
-                                            <%= name %>
-                                        </p>
-                                        <p>
-                                            <%= color %>
-                                        </p>
-                                    </div>
-                                    <% }) %>
-                            </div>
-
-
-                            <div class="palette-info">
-                                <p><strong>Base color:</strong>
-                                    <%= palette.basecolor %>
-                                </p>
-                                <p><strong>WCAG level:</strong>
-                                    <%= palette.level %>
-                                </p>
-                                <p><strong>Large text:</strong>
-                                    <%= palette.isLargeText ? 'Yes' : 'No' %>
-                                </p>
-                            </div>
-                        </div>
-                        <% }) %>
+        <% if (error && error.length> 0) { %>
+            <% error.forEach(msg=> { %>
+                <div class="alert alert-danger">
+                    <%= msg %>
                 </div>
-                <% } %>
+                <% }) %>
+                    <% } %>
 
-                    <a href="/">← Generate a new palette</a>
+                        <% if (success && success.length> 0) { %>
+                            <% success.forEach(msg=> { %>
+                                <div class="alert alert-success">
+                                    <%= msg %>
+                                </div>
+                                <% }) %>
+                                    <% } %>
+
+
+                                        <h1>Saved Color Palettes</h1>
+
+                                        <% if (palettes.length===0) { %>
+                                            <p>No palettes saved yet.</p>
+                                            <% } else { %>
+                                                <div class="palette-list">
+                                                    <% palettes.forEach(palette=> { %>
+                                                        <div class="palette-card">
+                                                            <div class="palette-header">
+                                                                <h2 class="palette-title">
+                                                                    <%= palette.name || 'Unnamed Palette' %>
+                                                                </h2>
+
+                                                                <form action="/palette/delete/<%= palette._id %>"
+                                                                    method="POST" class="delete-form">
+                                                                    <button type="submit" class="delete-btn">✖</button>
+                                                                </form>
+                                                            </div>
+
+                                                            <div class="color-row">
+                                                                <% Object.entries(palette.colors).forEach(([name,
+                                                                    color])=> {
+                                                                    const isLighter =
+                                                                    name.toLowerCase().includes('lighter');
+                                                                    const textColor = isLighter ? '#000' : '#fff';
+                                                                    %>
+                                                                    <div class="color-box"
+                                                                        style="background-color: <%= color %>; color: <%= textColor %>;">
+                                                                        <p>
+                                                                            <%= name %>
+                                                                        </p>
+                                                                        <p>
+                                                                            <%= color %>
+                                                                        </p>
+                                                                    </div>
+                                                                    <% }) %>
+                                                            </div>
+
+
+                                                            <div class="palette-info">
+                                                                <p><strong>Base color:</strong>
+                                                                    <%= palette.basecolor %>
+                                                                </p>
+                                                                <p><strong>WCAG level:</strong>
+                                                                    <%= palette.level %>
+                                                                </p>
+                                                                <p><strong>Large text:</strong>
+                                                                    <%= palette.isLargeText ? 'Yes' : 'No' %>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <% }) %>
+                                                </div>
+                                                <% } %>
+
+                                                    <a href="/">← Generate a new palette</a>
     </main>
 </body>
 
