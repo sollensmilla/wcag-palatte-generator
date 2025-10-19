@@ -12,6 +12,7 @@ export default class FlashMiddleware {
 
     init() {
         this.#validateSessionSecret()
+        this.#app.set('trust proxy', 1)
         this.#configureSession()
         this.#configureFlash()
         this.#exposeFlashToViews()
@@ -32,6 +33,7 @@ export default class FlashMiddleware {
                 cookie: {
                     httpOnly: true,
                     secure: process.env.NODE_ENV === 'production',
+                    sameSite: 'lax',
                     maxAge: 1000 * 60 * 60
                 }
             })
