@@ -23,7 +23,7 @@ Note: The app is deployed using the free version of Render, which means it takes
 
 - **Node.js** + **Express** – Server and routing  
 - **MVC Architecture** – Separation of concerns between models, views, and controllers  
-- - **Object-Oriented JavaScript** – Controllers and utilities implemented as reusable classes  
+- **Object-Oriented JavaScript** – Controllers and utilities implemented as reusable classes  
 - **EJS** – Templating engine for dynamic views  
 - **CSS** – For styling  
 - **MongoDB + Mongoose** – For saving palettes  
