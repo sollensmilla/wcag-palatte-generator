@@ -30,18 +30,41 @@
 
                                         <h1>Your WCAG Color Palette</h1>
 
-                                        <div class="palette" style="background-color: <%= palette.base %>;">
-                                            <% Object.entries(palette).forEach(([name, color])=> { %>
-                                                <div class="color-box" style="color: <%= color %>;">
-                                                    <p>
-                                                        <%= name %>
-                                                    </p>
-                                                    <p>
-                                                        <%= color %>
-                                                    </p>
-                                                </div>
-                                                <% }) %>
+                                        <div class="palette-card">
+                                            <div class="palette-header">
+                                                <h2 class="palette-title"> Palette Results</h2>
+                                            </div>
+
+                                            <div class="color-row">
+                                                <% Object.entries(palette).forEach(([name, color])=> {
+                                                    const isLighter = name.toLowerCase().includes('lighter');
+                                                    const textColor = isLighter ? '#000' : '#fff';
+                                                    %>
+                                                    <div class="color-box"
+                                                        style="background-color: <%= color %>; color: <%= textColor %>;">
+                                                        <p>
+                                                            <%= name %>
+                                                        </p>
+                                                        <p>
+                                                            <%= color %>
+                                                        </p>
+                                                    </div>
+                                                    <% }) %>
+                                            </div>
+
+                                            <div class="palette-info">
+                                                <p><strong>Base color:</strong>
+                                                    <%= basecolor %>
+                                                </p>
+                                                <p><strong>WCAG level:</strong>
+                                                    <%= level %>
+                                                </p>
+                                                <p><strong>Large text:</strong>
+                                                    <%= isLargeText ? 'Yes' : 'No' %>
+                                                </p>
+                                            </div>
                                         </div>
+
 
                                         <form action="/palette/save" method="POST">
                                             <label for="name">Palette Name:</label>
