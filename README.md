@@ -36,7 +36,6 @@ Example tests include:
 - Verifying that generated palettes meet WCAG AA/AAA standards
 - Checking that invalid hex codes (e.g. #123456ff) are cleaned before validation
 - Ensuring error messages appear for invalid or missing input
-- Testing flash messages and redirects according to the PRG pattern (Post/Redirect/Get)
 
 Additional test documentation can be found here:
 - [Requirement/Test specification](./docs/kravspecifikation.md)
