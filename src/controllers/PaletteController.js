@@ -12,41 +12,41 @@ import DatabaseError from '../errors/DatabaseError.js';
 const wcagColorService = new WcagColorService();
 
 export default class PaletteController {
-    generatePalette(req, res, next) {
+    async generatePalette(context) {
         try {
-            const { basecolor, level, isLargeText } = this.#validateGenerateInput(req.body);
+            const { basecolor, level, isLargeText } = this.#validateGenerateInput(context.req.body);
             const palette = this.#createPalette(basecolor, level, isLargeText);
-            this.#renderPalette(res, palette, basecolor, level, isLargeText);
+            context.render('palette', { palette, basecolor, level, isLargeText });
         } catch (error) {
-            next(error);
+            context.fail(error);
         }
     }
 
-    async savePalette(req, res, next) {
+    async savePalette(context) {
         try {
-            const paletteData = this.#validateSaveInput(req.body);
+            const paletteData = this.#validateSaveInput(context.req.body);
             await this.#savePaletteToDB(paletteData);
-            this.#handleSuccess(req, res, `Palette "${paletteData.name}" saved successfully!`);
+            context.redirect('/palette', `Palette "${paletteData.name}" saved successfully!`);
         } catch (error) {
-            next(error instanceof ValidationError ? error : new DatabaseError('Failed to save palette.'));
+            context.fail(error instanceof ValidationError ? error : new DatabaseError('Failed to save palette.'));
         }
     }
 
-    async showAllPalettes(req, res, next) {
+    async showAllPalettes(context) {
         try {
             const palettes = await this.#fetchAllPalettes();
-            res.render('palettes', { palettes });
+            context.render('palettes', { palettes });
         } catch {
-            next(new DatabaseError('Failed to fetch palettes.'));
+            context.fail(new DatabaseError('Failed to fetch palettes.'));
         }
     }
 
-    async deletePalette(req, res, next) {
+    async deletePalette(context) {
         try {
-            await this.#deletePaletteById(req.params.id);
-            this.#handleSuccess(req, res, 'Palette deleted successfully.');
+            await this.#deletePaletteById(context.req.params.id);
+            context.redirect('/palette', 'Palette deleted successfully.');
         } catch {
-            next(new DatabaseError('Failed to delete palette.'));
+            context.fail(new DatabaseError('Failed to delete palette.'));
         }
     }
 
@@ -91,14 +91,5 @@ export default class PaletteController {
 
     async #deletePaletteById(id) {
         await Palette.findByIdAndDelete(id);
-    }
-
-    #renderPalette(res, palette, basecolor, level, isLargeText) {
-        res.render('palette', { palette, basecolor, level, isLargeText });
-    }
-
-    #handleSuccess(req, res, message) {
-        req.flash('success', message);
-        res.redirect('/palette');
     }
 }
