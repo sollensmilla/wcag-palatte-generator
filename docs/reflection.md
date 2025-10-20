@@ -7,6 +7,10 @@ For this chapters reflection, I will use `AccessibleVariant`, the class I wrote 
 
 
 ## Chapter 3
+I have generally succeeded in keeping my functions and methods **Small!** and focused, following the principle that they should only **Do one thing**. I try to structure methods **top to bottom**, so the main logic is easy to follow. The hardest part has been keeping the number of **Arguments** low, which I don’t always manage according to a Clean Code perspective. To address this, I created a utility class `RequestContext` that wraps `req, res, and next`, allowing the controller methods to use a single argument. I also try to avoid booleans and unnecessary parameters to keep functions clear.
+
+![Request Context](/screenshots/chapter3_1.png)
+![Usage of util](/screenshots/chapter3_2.png)
 
 
 ## Chapter 4 - Comments
