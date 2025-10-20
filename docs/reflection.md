@@ -38,7 +38,9 @@ This chapter helped me appreciate the importance of **Clean Boundaries** when de
 ![Public API](/screenshots/chapter8.png)
 
 ## Chapter 9
+Although most of my current tests are manual, I can see how structuring them as automated unit tests would make them faster, independent, and repeatable, aligning with the **F.I.R.S.T.** principles. For example, in my tests for v1 of `WcagColorService` I checked `contrastRatio`, `passesWcag`, and `generatePalette` with valid inputs and also tested invalid hex colors to ensure `InvalidHexColorError` is thrown, keeping each scenario focused and clear on **One assert per test**. Writing **tests first** would help me focus on what the code should do rather than how it does it, and would make the codebase more maintainable. I also realized that well-designed tests enable the **-ilities** like flexibility and reliability, because they make refactoring safer. In future projects, I want to treat tests as first-class code, ensuring they are as readable and organized as the production code itself.
 
+![Tests](/screenshots/chapter9.png)
 
 ## Chapter 10
 
