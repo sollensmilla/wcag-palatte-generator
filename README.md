@@ -28,6 +28,41 @@ Note: The app is deployed using the free version of Render, which means it takes
 - **CSS** – For styling  
 - **MongoDB + Mongoose** – For saving palettes  
 
+## Getting Started 
+
+If you want to run the project locally: 
+
+
+1. **Fork** this repository  
+   Click the **Fork** button at the top right of the GitHub page to create your own copy.
+
+2. **Clone** your forked repo:
+   ```bash
+   git clone https://github.com/<your-username>/wcag-palette-generator.git
+   ````
+
+3. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+4. **Set up environment variables**
+   Create an `.env`file in the root directory and add:
+   ```bash
+   MONGODB_URI=your_mongodb_connection_string
+   SESSION_SECRET=your_session_secret
+   ```
+
+5. **Start the app:**
+   ```bash
+   npm start
+   ```
+
+6. **Visit the app in your browser at:**
+   ```bash
+   http://localhost:3015
+   ```
+   
 ## Testing
 
 The project includes manual tests to verify palette generation and contrast validation.
