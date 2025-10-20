@@ -12,7 +12,7 @@ import { dirname, join } from 'path'
 import mongoose from 'mongoose'
 
 import getHomePage from './src/controllers/mainController.js'
-import PaletteController from './src/controllers/paletteController.js'
+import PaletteController from './src/controllers/PaletteController.js'
 
 import paletteRoutes from './src/routes/paletteRoutes.js'
 
@@ -32,7 +32,7 @@ async function connectToDatabase() {
     console.log('Connected to MongoDB')
   } catch (err) {
     console.error('MongoDB connection error:', err)
-    process.exit(1) 
+    process.exit(1)
   }
 }
 connectToDatabase()

@@ -1,5 +1,5 @@
 import express from 'express'
-import PaletteController from '../controllers/paletteController.js'
+import PaletteController from '../controllers/PaletteController.js'
 import PaletteValidator from '../middleware/PaletteValidator.js'
 
 const router = express.Router()
