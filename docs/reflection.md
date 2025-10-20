@@ -30,11 +30,12 @@ Chapter 7 reinforced how error handling should make code cleaner, not messier. I
 
 ![AccessibleVariant error](/screenshots/chapter7_2.png)
 
-
 ![tryFindVariant](/screenshots/chapter7_3.png)
 
 ## Chapter 8
+This chapter helped me appreciate the importance of **Clean Boundaries** when designing modules and using them in my applications. In my `WcagColorService`, the public API is very clear, exposing only `isAccessible`, `generatePalette`, and `passesWcag`, while all internal logic—like `AccessibleVariant`, `ColorConverter`, and private methods—is fully encapsulated. This makes the service easy to use and hard to misuse, showing that I successfully isolated responsibilities. The chapter’s advice on **Using Third-Party Code** and **Using Code That Does Not Yet Exist** reinforced why keeping internal details hidden is important, so I could replace or update internal implementations later without affecting the controller. Overall, I feel my module demonstrates clean boundaries and good separation of concerns.
 
+![Public API](/screenshots/chapter8.png)
 
 ## Chapter 9
 
