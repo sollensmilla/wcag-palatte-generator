@@ -1,6 +1,9 @@
 # Clean Code reflections- Smilla Sollén
 
 ## Chapter 2
+For this chapters reflection, I will use `AccessibleVariant`, the class I wrote in L3 when refactoring my module as an example, because I can see both strengths and weaknesses in this class regarding this principle. Many of the method names, like `generateAccessiblePalette`, `findAccessibleVariant`, and `#tryFindSecondVariant`, makes good use of **Use Intention-Revealing Names** which helps readability and makes the code easier for another developer to understand without **Mental Mapping**. I also used descriptive variable names such as `lightnessStep` and `fallbackColors`, which improve clarity. However, some names, like `#shiftVariant` or `candidate`, could be more specific to make their intent immediately obvious, especially for someone unfamiliar with color accessibility. Overall, the chapter reminded me that investing extra thought into naming—even if it results in longer names—is worthwhile for maintainability and reducing mental translation. In future, I want to be even more careful with subtle distinctions in method and variable names to make the code self-explanatory.
+
+![Accessible Variant](/screenshots/chapter2.png)
 
 
 ## Chapter 3
@@ -32,12 +35,12 @@ Chapter 7 reinforced how error handling should make code cleaner, not messier. I
 
 ![tryFindVariant](/screenshots/chapter7_3.png)
 
-## Chapter 8
+## Chapter 8 - Boundaries
 This chapter helped me appreciate the importance of **Clean Boundaries** when designing modules and using them in my applications. In my `WcagColorService`, the public API is very clear, exposing only `isAccessible`, `generatePalette`, and `passesWcag`, while all internal logic—like `AccessibleVariant`, `ColorConverter`, and private methods—is fully encapsulated. This makes the service easy to use and hard to misuse, showing that I successfully isolated responsibilities. The chapter’s advice on **Using Third-Party Code** and **Using Code That Does Not Yet Exist** reinforced why keeping internal details hidden is important, so I could replace or update internal implementations later without affecting the controller. Overall, I feel my module demonstrates clean boundaries and good separation of concerns.
 
 ![Public API](/screenshots/chapter8.png)
 
-## Chapter 9
+## Chapter 9 - Unit Tests
 Although most of my current tests are manual, I can see how structuring them as automated unit tests would make them faster, independent, and repeatable, aligning with the **F.I.R.S.T.** principles. For example, in my tests for v1 of `WcagColorService` I checked `contrastRatio`, `passesWcag`, and `generatePalette` with valid inputs and also tested invalid hex colors to ensure `InvalidHexColorError` is thrown, keeping each scenario focused and clear on **One assert per test**. Writing **tests first** would help me focus on what the code should do rather than how it does it, and would make the codebase more maintainable. I also realized that well-designed tests enable the **-ilities** like flexibility and reliability, because they make refactoring safer. In future projects, I want to treat tests as first-class code, ensuring they are as readable and organized as the production code itself.
 
 ![Tests](/screenshots/chapter9.png)
