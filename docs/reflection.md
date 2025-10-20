@@ -12,7 +12,10 @@ This chapter made me reflect on how cluttered my old code with heaps of JSDocs l
 ![My JSDoc](/screenshots/chapter4.png)
 
 ## Chapter 5
+Chapter 5 felt very familiar to me, perhaps because formatting is already widely emphasized as a core aspect of code quality. I especially appreciated **the newspaper metaphor**, which I applied when structuring all my classes, (but I´ll use `PaletteController` as an example)— placing higher-level methods like `generatePalette` and `savePalette` first, followed by private helper functions, to make the code tell a clear story. The discussion on **horizontal formatting** made me more conscious of line length and visual grouping, which I applied when aligning object destructuring and method calls for better readability. Learning about **dependent function**s also helped me organize my code so that callers appear before details, improving the flow for anyone reading or maintaining the class. Overall, this chapter reinforced that thoughtful formatting is not just aesthetic, but a critical tool for **communication and readability**, making my code easier to follow for others and for my future self.
 
+![Beginning of class](/screenshots/chapter5_1.png)
+![End of class](/screenshots/chapter5_2.png)
 
 ## Chapter 6
 
