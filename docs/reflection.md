@@ -50,6 +50,12 @@ Although most of my current tests are manual, I can see how structuring them as 
 ![Tests](/screenshots/chapter9.png)
 
 ## Chapter 10
+The principle that **classes should be small and focused** really stood out to me. I often work with classes because they promote **Encapsulation** and make my code cleaner and easier to understand. While reviewing my code, I noticed that the `WcagColorService`lacked **Cohesion** and handled too many responsibilities. To follow the **single responsibility principle** and **Organize for change** I refactored it into two classes: where the `WcagColorService` focused on WCAG contrast calculations and delivering the palette, and `AccessibleVariant`is responsible for generating accessible color variants or fallbacks. This change made my code more modular, readable, and aligned with the clean code practices from the book.
 
+**`WcagColorService` before**
+![Before](/screenshots/chapter10_1.png)
+
+**`WcagColorService` after**
+![After](/screenshots/chapter10_2.png)
 
 ## Chapter 11
