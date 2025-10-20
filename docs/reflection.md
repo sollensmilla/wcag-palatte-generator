@@ -15,6 +15,7 @@ This chapter made me reflect on how cluttered my old code with heaps of JSDocs l
 Chapter 5 felt very familiar to me, perhaps because formatting is already widely emphasized as a core aspect of code quality. I especially appreciated **the newspaper metaphor**, which I applied when structuring all my classes, (but I´ll use `PaletteController` as an example)— placing higher-level methods like `generatePalette` and `savePalette` first, followed by private helper functions, to make the code tell a clear story. The discussion on **horizontal formatting** made me more conscious of line length and visual grouping, which I applied when aligning object destructuring and method calls for better readability. Learning about **dependent function**s also helped me organize my code so that callers appear before details, improving the flow for anyone reading or maintaining the class. Overall, this chapter reinforced that thoughtful formatting is not just aesthetic, but a critical tool for **communication and readability**, making my code easier to follow for others and for my future self.
 
 ![Beginning of class](/screenshots/chapter5_1.png)
+
 ![End of class](/screenshots/chapter5_2.png)
 
 ## Chapter 6 - Object and Data structures
@@ -23,7 +24,14 @@ The most interesting part of Chapter 6 for me was the **Law of Demeter** and the
 ![Part of AccessibleVariant](/screenshots/chapter6.png)
 
 ## Chapter 7 - Error Handling
+Chapter 7 reinforced how error handling should make code cleaner, not messier. I especially liked the idea to **Use Exceptions Rather Than Return Codes**, which I’ve applied in my error handlers, .e.g `AccessibleVariat` class by throwing a custom `NoAccessibleColorError` instead of returning a special value. This makes the intent clearer and separates the normal flow from exceptional cases, following the principle to **Write Your Try-Catch-Finally Statement First**. My `#tryFindVariant` method also reflects this by isolating exception handling and keeping the main logic readable. Finally, the idea to **Provide Context with Exceptions** fits well with my error message, which includes both the color and direction, helping anyone debugging understand what went wrong without extra digging.
 
+![AccessibleVariant](/screenshots/chapter7_1.png)
+
+![AccessibleVariant error](/screenshots/chapter7_2.png)
+
+
+![tryFindVariant](/screenshots/chapter7_3.png)
 
 ## Chapter 8
 
