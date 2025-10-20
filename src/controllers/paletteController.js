@@ -3,6 +3,7 @@
  * @author Smilla Sollén <ss226uk@student.lnu.se>
  * @version 1.0.0
  */
+
 import Palette from '../models/Palette.js';
 import { WcagColorService } from "wcag-color-service";
 import ValidationError from '../errors/ValidationError.js';
