@@ -21,7 +21,8 @@ Chapter 5 felt very familiar to me, perhaps because formatting is already widely
 The most interesting part of Chapter 6 for me was the **Law of Demeter** and the idea that getters and setters are often overused. Since I wrote this assignment in JavaScript, I didn´t apply that in this specifik project, but the principle still made me think about how much of my objects’ data I expose. The discussion abou t**Data/Object Anti-Symmetry** also made me reflect on my `AccessibleVariant` class, which hides most of its logic but still returns plain data objects in some methods—something that might blur the line between objects and data structures. I think my code avoids “train wrecks” well, but it still depends quite tightly on its collaborators, which could be improved by more abstraction. Overall, this chapter made me more aware of how to design cleaner and more consistent object structures.
 
 ![Part of AccessibleVariant](/screenshots/chapter6.png)
-## Chapter 7
+
+## Chapter 7 - Error Handling
 
 
 ## Chapter 8
