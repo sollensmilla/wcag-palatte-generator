@@ -49,7 +49,7 @@ Although most of my current tests are manual, I can see how structuring them as 
 
 ![Tests](/screenshots/chapter9.png)
 
-## Chapter 10
+## Chapter 10 - Classes
 The principle that **classes should be small and focused** really stood out to me. I often work with classes because they promote **Encapsulation** and make my code cleaner and easier to understand. While reviewing my code, I noticed that the `WcagColorService`lacked **Cohesion** and handled too many responsibilities. To follow the **single responsibility principle** and **Organize for change** I refactored it into two classes: where the `WcagColorService` focused on WCAG contrast calculations and delivering the palette, and `AccessibleVariant`is responsible for generating accessible color variants or fallbacks. This change made my code more modular, readable, and aligned with the clean code practices from the book.
 
 **`WcagColorService` before**
@@ -58,4 +58,7 @@ The principle that **classes should be small and focused** really stood out to m
 **`WcagColorService` after**
 ![After](/screenshots/chapter10_2.png)
 
-## Chapter 11
+## Chapter 11 - Systems
+ My MVC-based palette generator follows the books principle by isolating logic into models, controllers, and middleware. Features such as `FlashMiddleware` and `ErrorHandler` handle **cross-cutting concerns**.  Expressive methods like `generatePalette` and `savePalette` also act as a small **domain-specific language**, making the code more readable and aligned with the color palette domain. This structure helps me **optimize decision making**, as changes to one layer (like the color service or database model) can be made without affecting the others, resulting in a cleaner and more maintainable system.
+
+![Flash middleware](/screenshots/chapter11.png)
