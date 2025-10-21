@@ -68,13 +68,13 @@ If you want to run the project locally:
 The project includes manual tests to verify palette generation and contrast validation.
 
 Example tests include:
-- Verifying that generated palettes meet WCAG AA/AAA standards
 - Checking that invalid hex codes (e.g. #123456ff) are cleaned before validation
+- Ensuring code meets clean code guidelines
 - Ensuring error messages appear for invalid or missing input
 
 Additional test documentation can be found here:
 - [Requirement/Test specification](./docs/kravspecifikation.md)
-- Test Report
+- [Test Report](./test-reports/testreport_1.md)
 
 ## License
 
