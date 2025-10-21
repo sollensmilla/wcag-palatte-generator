@@ -66,22 +66,16 @@
                                             </div>
                                         </div>
 
-                                        <!-- Example section -->
-                                        <div class="palette-card">
-                                            <div class="palette-header">
-                                                <h2 class="palette-title">Example</h2>
-                                            </div>
-
-                                            <div class="example-row" style="background-color: <%= basecolor %>;">
-                                                <% const darker1=palette.darker1 || '#000' ; %>
-                                                    <% const darker2=palette.darker2 || '#333' ; %>
-
-                                                        <div class="example-color" style="color: <%= darker1 %>;">
-                                                            darker1</div>
-                                                        <div class="example-color" style="color: <%= darker2 %>;">
-                                                            darker2</div>
-                                            </div>
+                                        <div class="example-row" style="background-color: <%= basecolor %>;">
+                                            <% Object.entries(palette).forEach(([name, color])=> {
+                                                if (name.toLowerCase() !== 'base') {
+                                                %>
+                                                <div class="example-color" style="color: <%= color %>;">
+                                                    <%= name %> (<%= color %>)
+                                                </div>
+                                                <% } }); %>
                                         </div>
+
 
                                         <form action="/palette/save" method="POST">
                                             <label for="name">Palette Name:</label>
