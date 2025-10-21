@@ -79,39 +79,83 @@ h1 {
   margin-right: 20px;
 }
 
+/* --- BUTTON STYLES --- */
+
+
 .btn {
-    display: inline-block;
-    background-color: #616661;
-    color: white;
-    font-family: sans-serif;
-    border: none;
-    border-radius: 8px;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-    margin: 10px 0;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #616661;
+  color: white;
+  font-family: sans-serif;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  margin: 10px 0;
+  text-align: center;
 }
 
 .btn:hover {
-    background-color: #393f39;
-    transform: translateY(-2px);
+  background-color: #393f39;
+  transform: translateY(-2px);
 }
 
 .btn:active {
-    background-color: #393f39;
-    transform: translateY(0);
+  background-color: #393f39;
+  transform: translateY(0);
 }
 
-.generate {
-    padding: 12px 24px;
-    font-size: 16px;
+/* Make standalone "generate" buttons match the full-size ones */
+.btn.generate {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 15px;
+  font-size: 17px;
+  border-radius: 10px;
+  margin-top: 2rem;
+  min-width: 200px;
+  height: 40px;
+  text-align: center;
 }
 
+/* Save Palette button + input field */
 .save {
-      padding: 8px 16px;
-    font-size: 12px;
+  padding: 10px 20px;
+  font-size: 14px;
 }
 
+input[type="text"] {
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-left: 8px;
+}
+
+/* Button row */
+.button-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.button-row .btn {
+  flex: 1 1 280px;
+  max-width: 300px;
+  height: 60px;
+  font-size: 17px;
+  text-align: center;
+  padding: 0 20px;
+}
+
+/* Alerts */
 .alert {
   padding: 12px 20px;
   margin: 10px 0;
@@ -132,3 +176,18 @@ h1 {
   color: white;
 }
 
+/* Example section */
+.example-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.example-color {
+  font-family: "bd-supper";
+  font-weight: 400;
+  font-size: 2rem;
+}

@@ -65,6 +65,22 @@
                                             </div>
                                         </div>
 
+                                        <!-- Example section -->
+                                        <div class="palette-card">
+                                            <div class="palette-header">
+                                                <h2 class="palette-title">Example</h2>
+                                            </div>
+
+                                            <div class="example-row" style="background-color: <%= basecolor %>;">
+                                                <% const darker1=palette.darker1 || '#000' ; %>
+                                                    <% const darker2=palette.darker2 || '#333' ; %>
+
+                                                        <div class="example-color" style="color: <%= darker1 %>;">
+                                                            darker1</div>
+                                                        <div class="example-color" style="color: <%= darker2 %>;">
+                                                            darker2</div>
+                                            </div>
+                                        </div>
 
                                         <form action="/palette/save" method="POST">
                                             <label for="name">Palette Name:</label>
@@ -79,13 +95,13 @@
                                             <button type="submit" class="btn save">Save Palette</button>
                                         </form>
 
+                                        <div class="button-row">
+                                            <a href="/" class="btn generate">Generate a new palette</a>
+                                            <form action="/palette" method="GET" style="display:inline;">
+                                                <button type="submit" class="btn generate">Show Saved Palettes</button>
+                                            </form>
+                                        </div>
 
-                                        <a href="/" class="btn generate">Generate a new palette</a>
-
-
-                                        <form action="/palette" method="GET">
-                                            <button type="submit" class="btn generate">Show Saved Palettes</button>
-                                        </form>
     </main>
 </body>
 
